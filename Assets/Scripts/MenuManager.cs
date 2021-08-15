@@ -29,6 +29,8 @@ public class MenuManager : MonoBehaviour
         Toggle tabToggle = tab.GetComponent<Toggle>();
         tabToggle.group = tabGroup;
 
+        SetTabImages(optionsManager.TabIcons[(int)type], tab);
+
         GameObject tabPane = SpawnPrefab(tabPanePrefab, tabContentArea);
 
         tabToggle.onValueChanged.AddListener(delegate
@@ -38,6 +40,17 @@ public class MenuManager : MonoBehaviour
             if (tabToggle.isOn) tabTitle.GetComponent<Text>().text = type.ToString();
             tabPane.SetActive(tabToggle.isOn);
         });
+    }
+
+    public void SetTabImages(ToggleIconSet tabIcons, GameObject tab)
+    {
+        Toggle tabToggle = tab.GetComponent<Toggle>();
+        foreach (Transform child in tab.transform)
+        {
+            Image img = child.gameObject.GetComponent<Image>();
+            if (child.name == "Inactive Icon") img.sprite = tabIcons.InactiveIcon;
+            else if (child.name == "Active Icon") img.sprite = tabIcons.ActiveIcon;
+        }
     }
 
     public GameObject SpawnPrefab(GameObject prefab, GameObject parent)
