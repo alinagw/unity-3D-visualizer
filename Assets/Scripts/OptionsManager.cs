@@ -25,7 +25,10 @@ public class OptionsManager : MonoBehaviour
     {
         Material[] loadedMats = Resources.LoadAll<Material>("Materials");
         Option<Material>[] convertedMats = loadedMats.Select(material => new Option<Material>(material.name, material)).ToArray();
-        m_materials = convertedMats;
+        
+        m_materials = new Option<Material>[convertedMats.Length + 1];
+        m_materials[0] = new Option<Material>("Original", null);
+        convertedMats.CopyTo(m_materials, 1);
     }
 
     public ToggleIconSet[] LoadTabIcons(dynamic types)
