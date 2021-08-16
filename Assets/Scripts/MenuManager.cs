@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     public GameObject tabPanePrefab;
 
     public GameObject tabTitle;
+    public GameObject optionTogglePrefab;
 
     private Animator menuAnimator;
     private ToggleGroup tabGroup;
@@ -40,6 +41,8 @@ public class MenuManager : MonoBehaviour
             if (tabToggle.isOn) tabTitle.GetComponent<Text>().text = type.ToString();
             tabPane.SetActive(tabToggle.isOn);
         });
+
+        CreateOptionToggles(type, tabPane);
     }
 
     public void SetTabImages(ToggleIconSet tabIcons, GameObject tab)
@@ -50,6 +53,23 @@ public class MenuManager : MonoBehaviour
             Image img = child.gameObject.GetComponent<Image>();
             if (child.name == "Inactive Icon") img.sprite = tabIcons.InactiveIcon;
             else if (child.name == "Active Icon") img.sprite = tabIcons.ActiveIcon;
+        }
+    }
+
+    public void CreateOptionToggles(OptionsManager.OptionType type, GameObject toggleList)
+    {
+        var options = optionsManager.GetOptionsOfType(type);
+        foreach (var option in options)
+        {
+            GameObject optionToggle = SpawnPrefab(optionTogglePrefab, toggleList);
+            Toggle toggleComponent = optionToggle.GetComponent<Toggle>();
+            toggleComponent.group = toggleList.GetComponent<ToggleGroup>();
+            
+            optionToggle.GetComponentInChildren<Text>().text = option.Name;
+            toggleComponent.onValueChanged.AddListener(delegate
+                {
+                    // need to update model with selected option
+                });
         }
     }
 

@@ -25,6 +25,7 @@ public class OptionsManager : MonoBehaviour
     {
         Material[] loadedMats = Resources.LoadAll<Material>("Materials");
         Option<Material>[] convertedMats = loadedMats.Select(material => new Option<Material>(material.name, material)).ToArray();
+        m_materials = convertedMats;
     }
 
     public ToggleIconSet[] LoadTabIcons(dynamic types)
@@ -35,6 +36,13 @@ public class OptionsManager : MonoBehaviour
             icons[(int)type] = new ToggleIconSet("TabIcons/" + (type).ToString());
         }
         return icons;
+    }
+
+    public dynamic GetOptionsOfType(OptionType type)
+    {
+        if (type == OptionType.Models) return Models;
+        else if (type == OptionType.Materials) return Materials;
+        else return null;
     }
 
     void Awake()
