@@ -27,13 +27,13 @@ public class MenuManager : MonoBehaviour
 
     public void CreateTab(OptionsManager.OptionType type)
     {
-        GameObject tab = SpawnPrefab(tabButtonPrefab, tabList);
+        GameObject tab = Helper.SpawnPrefab(tabButtonPrefab, tabList);
         Toggle tabToggle = tab.GetComponent<Toggle>();
         tabToggle.group = tabGroup;
 
         SetTabImages(optionsManager.TabIcons[(int)type], tab);
 
-        GameObject tabPane = SpawnPrefab(tabPanePrefab, tabContentArea);
+        GameObject tabPane = Helper.SpawnPrefab(tabPanePrefab, tabContentArea);
 
         tabToggle.onValueChanged.AddListener(delegate
         {
@@ -62,7 +62,7 @@ public class MenuManager : MonoBehaviour
         var options = optionsManager.GetOptionsOfType(type);
         foreach (var option in options)
         {
-            GameObject optionToggle = SpawnPrefab(optionTogglePrefab, toggleList);
+            GameObject optionToggle = Helper.SpawnPrefab(optionTogglePrefab, toggleList);
             Toggle toggleComponent = optionToggle.GetComponent<Toggle>();
             toggleComponent.group = toggleList.GetComponent<ToggleGroup>();
             
@@ -71,26 +71,6 @@ public class MenuManager : MonoBehaviour
                 {
                     stateManager.SetOption(type, option, toggleComponent.isOn);
                 });
-        }
-    }
-
-    public GameObject SpawnPrefab(GameObject prefab, GameObject parent)
-    {
-        GameObject newObject = GameObject.Instantiate(prefab);
-        newObject.transform.SetParent(parent.transform);
-        newObject.transform.localScale = Vector3.one;
-        newObject.transform.localRotation = Quaternion.identity;
-        return newObject;
-    }
-
-    public void DestroyChildren(GameObject parent)
-    {
-        if (parent.transform.childCount > 0)
-        {
-            foreach (Transform child in parent.transform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
         }
     }
 

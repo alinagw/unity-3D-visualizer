@@ -10,8 +10,8 @@ public class StateManager : MonoBehaviour
 
     public void SetModel(GameObject prefab)
     {
-        DestroyChildren(modelController.gameObject);
-        SpawnPrefab(prefab, modelController.gameObject);
+        Helper.DestroyChildren(modelController.gameObject);
+        Helper.SpawnPrefab(prefab, modelController.gameObject);
         m_activeModel = prefab;
         SetMaterial(m_activeMaterial);
     }
@@ -46,25 +46,5 @@ public class StateManager : MonoBehaviour
     {
         m_activeMaterial = null;
         SetModel(optionsManager.Models[0].Item);
-    }
-
-    public GameObject SpawnPrefab(GameObject prefab, GameObject parent)
-    {
-        GameObject newObject = GameObject.Instantiate(prefab);
-        newObject.transform.SetParent(parent.transform);
-        newObject.transform.localScale = Vector3.one;
-        newObject.transform.localRotation = Quaternion.identity;
-        return newObject;
-    }
-
-    public void DestroyChildren(GameObject parent)
-    {
-        if (parent.transform.childCount > 0)
-        {
-            foreach (Transform child in parent.transform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
-        }
     }
 }
