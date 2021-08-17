@@ -15,6 +15,9 @@ public class OptionsManager : MonoBehaviour
     private ToggleIconSet[] m_tabIcons;
     public ToggleIconSet[] TabIcons { get { return m_tabIcons; } }
 
+        private ToggleIconSet[] m_transformTabIcons;
+    public ToggleIconSet[] TransformTabIcons { get { return m_transformTabIcons; } }
+
     public void LoadModels()
     {
         GameObject[] loadedModels = Resources.LoadAll<GameObject>("Models");
@@ -53,5 +56,6 @@ public class OptionsManager : MonoBehaviour
         LoadModels();
         LoadMaterials();
         m_tabIcons = LoadTabIcons(Helper.GetEnumValues<OptionType>());
+        m_transformTabIcons = LoadTabIcons(Helper.GetEnumValues<ModelController.TransformType>());
     }
 }

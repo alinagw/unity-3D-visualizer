@@ -55,6 +55,7 @@ public class MenuManager : MonoBehaviour
     {
         GameObject tab = Helper.SpawnPrefab(tabButtonPrefab, transformTabList);
         Toggle tabToggle = tab.GetComponent<Toggle>();
+        SetTabImages(optionsManager.TransformTabIcons[(int)type], tab);
 
         if (type == ModelController.TransformType.Reset)
         {
