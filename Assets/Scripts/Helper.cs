@@ -23,4 +23,9 @@ public static class Helper
             }
         }
     }
+
+    public static T[] GetEnumValues<T>()
+    {
+        return (T[])System.Enum.GetValues(typeof(T));
+    }
 }

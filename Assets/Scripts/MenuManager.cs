@@ -5,9 +5,13 @@ public class MenuManager : MonoBehaviour
 {
     public OptionsManager optionsManager;
     public StateManager stateManager;
+    public ModelController modelController;
 
     public GameObject tabList;
     public GameObject tabButtonPrefab;
+
+        public GameObject transformTabList;
+    
     
     public GameObject tabContentArea;
     public GameObject tabPanePrefab;
@@ -17,6 +21,7 @@ public class MenuManager : MonoBehaviour
 
     private Animator menuAnimator;
     private ToggleGroup tabGroup;
+    private ToggleGroup transformTabGroup;
     
     private bool m_menuIsOpen = false;
 
@@ -44,6 +49,29 @@ public class MenuManager : MonoBehaviour
         });
 
         CreateOptionToggles(type, tabPane);
+    }
+
+    public void CreateTransformTab(ModelController.TransformType type)
+    {
+        GameObject tab = Helper.SpawnPrefab(tabButtonPrefab, transformTabList);
+        Toggle tabToggle = tab.GetComponent<Toggle>();
+
+        if (type == ModelController.TransformType.Reset)
+        {
+            tabToggle.onValueChanged.AddListener(delegate
+        {
+            modelController.ResetAllTransforms();
+            tabToggle.SetIsOnWithoutNotify(false);
+        });
+        }
+        else
+        {
+            tabToggle.group = transformTabGroup;
+            tabToggle.onValueChanged.AddListener(delegate
+        {
+            if (tabToggle.isOn) modelController.UpdateTransformType(type);
+        });
+        }
     }
 
     public void SetTabImages(ToggleIconSet tabIcons, GameObject tab)
@@ -80,10 +108,16 @@ public class MenuManager : MonoBehaviour
         stateManager.InitializeState();
         menuAnimator = GetComponent<Animator>();
         tabGroup = tabList.GetComponent<ToggleGroup>();
+        transformTabGroup = transformTabList.GetComponent<ToggleGroup>();
 
-        foreach (OptionsManager.OptionType type in (OptionsManager.OptionType[])System.Enum.GetValues(typeof(OptionsManager.OptionType)))
+        foreach (OptionsManager.OptionType type in Helper.GetEnumValues<OptionsManager.OptionType>())
         {
             CreateTab(type);
+        }
+
+        foreach (ModelController.TransformType type in Helper.GetEnumValues<ModelController.TransformType>())
+        {
+            CreateTransformTab(type);
         }
 
         tabGroup.SetAllTogglesOff();

@@ -52,6 +52,6 @@ public class OptionsManager : MonoBehaviour
     {
         LoadModels();
         LoadMaterials();
-        m_tabIcons = LoadTabIcons((OptionType[])System.Enum.GetValues(typeof(OptionType)));
+        m_tabIcons = LoadTabIcons(Helper.GetEnumValues<OptionType>());
     }
 }

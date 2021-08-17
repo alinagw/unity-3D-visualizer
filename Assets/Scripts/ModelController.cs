@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ModelController : MonoBehaviour
 {
@@ -10,6 +11,38 @@ public class ModelController : MonoBehaviour
     public float scaleSpeed;
     public float minScale;
     public float maxScale;
+
+    public Sprite joystickBgBoth;
+    public Sprite joystickBgHorizontal;
+    public Sprite joystickBgVertical;
+
+    public enum TransformType { Translate, Rotate, Scale, Reset };
+
+    private TransformType m_currTransformType;
+    public TransformType CurrTransformType { get { return m_currTransformType; } set { m_currTransformType = value; } }
+
+    public void UpdateTransformType(TransformType type)
+    {
+        m_currTransformType = type;
+
+        Image bgImg = joystick.gameObject.GetComponent<Image>();
+
+        if (m_currTransformType == TransformType.Translate)
+        {
+            joystick.AxisOptions = AxisOptions.Both;
+            bgImg.sprite = joystickBgBoth;
+        }
+        else if (m_currTransformType == TransformType.Rotate)
+        {
+            joystick.AxisOptions = AxisOptions.Horizontal;
+            bgImg.sprite = joystickBgHorizontal;
+        }
+        else if (m_currTransformType == TransformType.Scale)
+        {
+            joystick.AxisOptions = AxisOptions.Vertical;
+            bgImg.sprite = joystickBgVertical;
+        }
+    }
 
     public void TranslateModel()
     {
@@ -51,11 +84,16 @@ public class ModelController : MonoBehaviour
         ResetScale();
     }
 
+    public void UpdateTransform()
+    {
+        if (m_currTransformType == TransformType.Translate) TranslateModel();
+        else if (m_currTransformType == TransformType.Rotate) RotateModel();
+        else if (m_currTransformType == TransformType.Scale) ScaleModel();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // TranslateModel();
-        // RotateModel();
-        // ScaleModel();
+        UpdateTransform();
     }
 }
