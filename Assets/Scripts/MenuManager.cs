@@ -95,7 +95,7 @@ public class MenuManager : MonoBehaviour
             Toggle toggleComponent = optionToggle.GetComponent<Toggle>();
             toggleComponent.group = toggleList.GetComponent<ToggleGroup>();
             
-            optionToggle.GetComponentInChildren<Text>().text = option.Name;
+            optionToggle.GetComponentInChildren<Text>().text = optionsManager.GetOptionName(type, option);
             toggleComponent.onValueChanged.AddListener(delegate
                 {
                     stateManager.SetOption(type, option, toggleComponent.isOn);

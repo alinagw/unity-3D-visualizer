@@ -24,6 +24,11 @@ public static class Helper
         }
     }
 
+    public static string AddSpacesToString(string str)
+    {
+        return string.Concat(str.Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+    }
+
     public static T[] GetEnumValues<T>()
     {
         return (T[])System.Enum.GetValues(typeof(T));

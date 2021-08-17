@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.23921569, g: 0.74509805, b: 0.8509804, a: 1}
+  m_AmbientEquatorColor: {r: 0.9490196, g: 0.9490196, b: 0.92156863, a: 1}
+  m_AmbientGroundColor: {r: 0.34509805, g: 0.38039216, b: 0.65882355, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: c051fe5a20f72814f9643eb10ebbd2fc, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7913a63e7107142d19f31ba6fc13e355, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -417,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionsManager: {fileID: 1405610808}
   modelController: {fileID: 899123072}
+  environmentLight: {fileID: 1780719271}
 --- !u!4 &545864395
 Transform:
   m_ObjectHideFlags: 0
@@ -927,6 +928,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55f7a4873e034beb969366c765f23f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  daySkyColor: {r: 0.23921569, g: 0.74509805, b: 0.8509804, a: 1}
+  dayEquatorColor: {r: 0.9490196, g: 0.9490196, b: 0.92156863, a: 1}
+  dayGroundColor: {r: 0.34509805, g: 0.38039216, b: 0.65882355, a: 1}
+  nightSkyColor: {r: 0.17254902, g: 0.29803923, b: 0.8509804, a: 1}
+  nightEquatorColor: {r: 0.3254902, g: 0.5176471, b: 0.7254902, a: 1}
+  nightGroundColor: {r: 0.11372549, g: 0.17254902, b: 0.35686275, a: 1}
 --- !u!4 &1405610809
 Transform:
   m_ObjectHideFlags: 0
@@ -1066,76 +1073,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780719273}
-  - component: {fileID: 1780719272}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Environment Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!108 &1780719272
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780719271}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
 --- !u!4 &1780719273
 Transform:
   m_ObjectHideFlags: 0
