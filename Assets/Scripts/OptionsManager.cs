@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OptionsManager : MonoBehaviour
 {
-    public enum OptionType { Models, Materials, TimesOfDay };
+    public enum OptionType { Models, Materials, TimesOfDay, Lights };
 
     [ColorUsage(true, true)]
     public Color daySkyColor;
@@ -34,6 +34,8 @@ public class OptionsManager : MonoBehaviour
 
         private ToggleIconSet[] m_transformTabIcons;
     public ToggleIconSet[] TransformTabIcons { get { return m_transformTabIcons; } }
+
+    public enum LightEffect { Fireflies };
 
     public void LoadModels()
     {
@@ -74,6 +76,7 @@ public class OptionsManager : MonoBehaviour
         if (type == OptionType.Models) return Models;
         else if (type == OptionType.Materials) return Materials;
         else if (type == OptionType.TimesOfDay) return TimesOfDay;
+        if (type == OptionType.Lights) return Helper.GetEnumValues<LightEffect>();
         else return null;
     }
 
@@ -83,6 +86,7 @@ public class OptionsManager : MonoBehaviour
         if (type == OptionType.Models) name = ((Option<GameObject>)option).Name;
         else if (type == OptionType.Materials) name = ((Option<Material>)option).Name;
         else if (type == OptionType.TimesOfDay) name = ((TimeOfDay)option).Name;
+        else if (type == OptionType.Lights) name = ((LightEffect)option).ToString();
         else return null;
 
         return Helper.AddSpacesToString(name);

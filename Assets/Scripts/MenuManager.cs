@@ -93,8 +93,10 @@ public class MenuManager : MonoBehaviour
         {
             GameObject optionToggle = Helper.SpawnPrefab(optionTogglePrefab, toggleList);
             Toggle toggleComponent = optionToggle.GetComponent<Toggle>();
-            toggleComponent.group = toggleList.GetComponent<ToggleGroup>();
-            
+            if (type != OptionsManager.OptionType.Lights)
+            {
+                toggleComponent.group = toggleList.GetComponent<ToggleGroup>();
+            }
             optionToggle.GetComponentInChildren<Text>().text = optionsManager.GetOptionName(type, option);
             toggleComponent.onValueChanged.AddListener(delegate
                 {

@@ -5,10 +5,12 @@ public class StateManager : MonoBehaviour
     public OptionsManager optionsManager;
     public ModelController modelController;
     public GameObject environmentLight;
+    public GameObject fireflies;
 
     private GameObject m_activeModel;
     private Material m_activeMaterial;
     private TimeOfDay m_activeTime;
+    private bool m_firefliesActive;
 
     public void SetModel(GameObject prefab)
     {
@@ -45,9 +47,20 @@ public class StateManager : MonoBehaviour
         m_activeTime = newTime;
     }
 
+    public void ToggleFireflies(bool isOn)
+    {
+        m_firefliesActive = isOn;
+        fireflies.SetActive(m_firefliesActive);
+
+        ParticleSystem system = fireflies.GetComponent<ParticleSystem>();
+        if (m_firefliesActive) system.Play();
+        else system.Stop();
+    }
+
     public void SetOption(OptionsManager.OptionType type, dynamic option, bool isOn)
     {
-        if (isOn)
+        if (type == OptionsManager.OptionType.Lights) ToggleFireflies(isOn);
+        else if (isOn)
         {
             if (type == OptionsManager.OptionType.Models) SetModel(((Option<GameObject>)option).Item);
             else if (type == OptionsManager.OptionType.Materials) SetMaterial(((Option<Material>)option).Item);
@@ -65,5 +78,6 @@ public class StateManager : MonoBehaviour
         m_activeMaterial = null;
         SetModel(optionsManager.Models[0].Item);
         SetTimeOfDay(optionsManager.TimesOfDay[0]);
+        ToggleFireflies(false);
     }
 }
