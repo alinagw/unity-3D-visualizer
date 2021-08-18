@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6387549349593179141}
   - component: {fileID: 4513201145937155541}
   - component: {fileID: 4286194421701831045}
-  - component: {fileID: 6845125281204602473}
   m_Layer: 0
   m_Name: mmGroup3
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303104072815995435}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.05, y: -6.17, z: 0.15}
+  m_LocalPosition: {x: 0.05, y: -6.15, z: 0.15}
   m_LocalScale: {x: 0.4, y: 0.40000007, z: 0.40000007}
   m_Children: []
   m_Father: {fileID: 7291292436356633055}
@@ -83,19 +82,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6845125281204602473
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303104072815995435}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 11.537489, y: 21.505434, z: 0.0000009536743}
-  m_Center: {x: 0.33533168, y: 0.2995758, z: 15.508041}
 --- !u!1 &2851548059349625846
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +93,6 @@ GameObject:
   - component: {fileID: 8574709276220842939}
   - component: {fileID: 5698703582820858642}
   - component: {fileID: 5779899394710305123}
-  - component: {fileID: 8111458086331095816}
   m_Layer: 0
   m_Name: mmGroup0
   m_TagString: Untagged
@@ -123,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2851548059349625846}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.05, y: -6.17, z: 0.15}
+  m_LocalPosition: {x: 0.05, y: -6.15, z: 0.15}
   m_LocalScale: {x: 0.4, y: 0.40000007, z: 0.40000007}
   m_Children: []
   m_Father: {fileID: 7291292436356633055}
@@ -179,19 +164,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8111458086331095816
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2851548059349625846}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 11.725677, y: 21.854462, z: 23.521938}
-  m_Center: {x: 0.4116273, y: 0.13460302, z: 27.26901}
 --- !u!1 &7291292436356633052
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7291292436356633055}
+  - component: {fileID: 8370719833246190565}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -224,3 +197,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8370719833246190565
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291292436356633052}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.88, y: 9.6, z: 4.84}
+  m_Center: {x: 0, y: 4.81, z: 0}
