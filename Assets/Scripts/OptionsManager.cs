@@ -35,7 +35,7 @@ public class OptionsManager : MonoBehaviour
         private ToggleIconSet[] m_transformTabIcons;
     public ToggleIconSet[] TransformTabIcons { get { return m_transformTabIcons; } }
 
-    public enum LightEffect { Fireflies };
+    public enum LightEffect { StringLights, Fireflies };
 
     public void LoadModels()
     {
