@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public OptionsManager optionsManager;
-    public StateManager stateManager;
     public ModelController modelController;
 
     public GameObject tabList;
@@ -100,7 +99,7 @@ public class MenuManager : MonoBehaviour
             optionToggle.GetComponentInChildren<Text>().text = optionsManager.GetOptionName(type, option);
             toggleComponent.onValueChanged.AddListener(delegate
                 {
-                    stateManager.SetOption(type, option, toggleComponent.isOn);
+                    optionsManager.SetOption(type, option, toggleComponent.isOn);
                 });
         }
     }
@@ -108,7 +107,7 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stateManager.InitializeState();
+        // stateManager.InitializeState();
         menuAnimator = GetComponent<Animator>();
         tabGroup = tabList.GetComponent<ToggleGroup>();
         transformTabGroup = transformTabList.GetComponent<ToggleGroup>();

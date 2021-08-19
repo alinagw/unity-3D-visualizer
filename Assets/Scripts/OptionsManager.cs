@@ -20,14 +20,14 @@ public class OptionsManager : MonoBehaviour
     [ColorUsage(true, true)]
     public Color nightGroundColor;
 
-    private Option<GameObject>[] m_models;
-    public Option<GameObject>[] Models { get { return m_models; } }
+    private static Option<GameObject>[] m_models;
+    public static Option<GameObject>[] Models { get { return m_models; } }
 
-    private Option<Material>[] m_materials;
-    public Option<Material>[] Materials { get { return m_materials; } }
+    private static Option<Material>[] m_materials;
+    public static Option<Material>[] Materials { get { return m_materials; } }
 
-    private TimeOfDay[] m_timesOfDay;
-    public TimeOfDay[] TimesOfDay { get { return m_timesOfDay; } }
+    private static TimeOfDay[] m_timesOfDay;
+    public static TimeOfDay[] TimesOfDay { get { return m_timesOfDay; } }
 
     private ToggleIconSet[] m_tabIcons;
     public ToggleIconSet[] TabIcons { get { return m_tabIcons; } }
@@ -36,6 +36,11 @@ public class OptionsManager : MonoBehaviour
     public ToggleIconSet[] TransformTabIcons { get { return m_transformTabIcons; } }
 
     public enum LightEffect { StringLights, Fireflies };
+
+    public ModelController modelController;
+    public FirefliesController firefliesController;
+    public StringLightsController stringLightsController;
+    public EnvironmentController environmentController;
 
     public void LoadModels()
     {
@@ -92,6 +97,20 @@ public class OptionsManager : MonoBehaviour
         return Helper.AddSpacesToString(name);
     }
 
+    public void SetOption(OptionType type, dynamic option, bool isOn)
+    {
+        if (type == OptionType.Lights) {
+            option = (LightEffect)option;
+            if (option == LightEffect.StringLights) stringLightsController.ToggleLights(isOn);
+            else if (option == LightEffect.Fireflies) firefliesController.ToggleFireflies(isOn);
+        } else if (isOn)
+        {
+            if (type == OptionType.Models) modelController.SetModel(((Option<GameObject>)option).Item);
+            else if (type == OptionType.Materials) modelController.SetMaterial(((Option<Material>)option).Item);
+            else if (type == OptionType.TimesOfDay) environmentController.SetTimeOfDay((TimeOfDay)option);
+        }
+    }
+
     void Awake()
     {
         LoadModels();
@@ -99,5 +118,10 @@ public class OptionsManager : MonoBehaviour
         LoadTimesOfDay();
         m_tabIcons = LoadTabIcons(Helper.GetEnumValues<OptionType>());
         m_transformTabIcons = LoadTabIcons(Helper.GetEnumValues<ModelController.TransformType>());
+
+        stringLightsController.ToggleLights(false);
+        firefliesController.ToggleFireflies(false);
+        environmentController.SetTimeOfDay(TimesOfDay[0]);
+        modelController.SetModel(Models[0].Item);
     }
 }

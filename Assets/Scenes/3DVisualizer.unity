@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: f36ebad13193b41b2a1beeb13032ae9e, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 850516dada0b54cb583ce2ac1e91b50a, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -443,54 +443,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265853226}
   m_CullTransparentMesh: 1
---- !u!1 &545864393
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 545864395}
-  - component: {fileID: 545864394}
-  m_Layer: 0
-  m_Name: State Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &545864394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545864393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90502ffbea43d4248a5df5780b43c82b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  optionsManager: {fileID: 1405610808}
-  modelController: {fileID: 899123072}
-  environmentLight: {fileID: 1780719271}
-  stringLightsController: {fileID: 676874756}
-  fireflies: {fileID: 5804147717520744805}
---- !u!4 &545864395
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545864393}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &676028447 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
@@ -518,7 +470,7 @@ GameObject:
   - component: {fileID: 676874757}
   - component: {fileID: 676874756}
   m_Layer: 0
-  m_Name: String Lights
+  m_Name: String Lights Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,6 +729,70 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &918288353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 918288355}
+  - component: {fileID: 918288354}
+  m_Layer: 0
+  m_Name: Reflection Probe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!215 &918288354
+ReflectionProbe:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918288353}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Type: 0
+  m_Mode: 1
+  m_RefreshMode: 2
+  m_TimeSlicingMode: 0
+  m_Resolution: 256
+  m_UpdateFrequency: 0
+  m_BoxSize: {x: 50, y: 20, z: 50}
+  m_BoxOffset: {x: 0, y: 0, z: 0}
+  m_NearClip: 0.3
+  m_FarClip: 1000
+  m_ShadowDistance: 100
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IntensityMultiplier: 1
+  m_BlendDistance: 1
+  m_HDR: 1
+  m_BoxProjection: 0
+  m_RenderDynamicObjects: 0
+  m_UseOcclusionCulling: 1
+  m_Importance: 1
+  m_CustomBakedTexture: {fileID: 0}
+--- !u!4 &918288355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918288353}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.8, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &949973651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,6 +1117,10 @@ MonoBehaviour:
   nightSkyColor: {r: 0.17254902, g: 0.29803923, b: 0.8509804, a: 1}
   nightEquatorColor: {r: 0.3254902, g: 0.5176471, b: 0.7254902, a: 1}
   nightGroundColor: {r: 0.11372549, g: 0.17254902, b: 0.35686275, a: 1}
+  modelController: {fileID: 899123072}
+  firefliesController: {fileID: 5804147717520744808}
+  stringLightsController: {fileID: 676874756}
+  environmentController: {fileID: 1780719272}
 --- !u!4 &1405610809
 Transform:
   m_ObjectHideFlags: 0
@@ -1113,7 +1133,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1598588801
 GameObject:
@@ -1197,7 +1217,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 7.864, y: 0, z: 0}
 --- !u!114 &1598588805
 MonoBehaviour:
@@ -1240,13 +1260,27 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780719273}
+  - component: {fileID: 1780719272}
   m_Layer: 0
-  m_Name: Environment Light
+  m_Name: Environment Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1780719272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780719271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26661084830c44a68be06304924e1e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refProbe: {fileID: 918288354}
 --- !u!4 &1780719273
 Transform:
   m_ObjectHideFlags: 0
@@ -1259,7 +1293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 48.813, y: 65.539, z: 15.996}
 --- !u!1 &1792993906
 GameObject:
@@ -1343,7 +1377,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 949973653}
   m_HandleRect: {fileID: 949973652}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1907,7 +1941,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsManager: {fileID: 1405610808}
-  stateManager: {fileID: 545864394}
   modelController: {fileID: 899123072}
   tabList: {fileID: 703121559470131508}
   tabButtonPrefab: {fileID: 4119095890406367670, guid: 2d0e3dea9ea0847a5a49070e28fb193e, type: 3}
@@ -2161,8 +2194,9 @@ GameObject:
   - component: {fileID: 5804147717520744806}
   - component: {fileID: 5804147717520744807}
   - component: {fileID: 5804147717520744804}
+  - component: {fileID: 5804147717520744808}
   m_Layer: 0
-  m_Name: Fireflies
+  m_Name: Fireflies Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6890,6 +6924,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &5804147717520744808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5804147717520744805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031c89ad9cf714897a1cdc6d6be36055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5804147717530169528
 MonoBehaviour:
   m_ObjectHideFlags: 0

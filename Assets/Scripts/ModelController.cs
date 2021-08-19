@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +18,9 @@ public class ModelController : MonoBehaviour
 
     private TransformType m_currTransformType;
     public TransformType CurrTransformType { get { return m_currTransformType; } set { m_currTransformType = value; } }
+
+    private GameObject m_activeModel;
+    private Material m_activeMaterial;
 
     public void UpdateTransformType(TransformType type)
     {
@@ -62,26 +63,11 @@ public class ModelController : MonoBehaviour
         transform.localScale = Vector3.one * newScale;
     }
 
-    public void ResetPosition()
-    {
-        transform.position = Vector3.zero;
-    }
-
-    public void ResetRotation()
-    {
-        transform.rotation = Quaternion.identity;
-    }
-
-    public void ResetScale()
-    {
-        transform.localScale = Vector3.one;
-    }
-
     public void ResetAllTransforms()
     {
-        ResetPosition();
-        ResetRotation();
-        ResetScale();
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
     }
 
     public void UpdateTransform()
@@ -89,6 +75,31 @@ public class ModelController : MonoBehaviour
         if (m_currTransformType == TransformType.Translate) TranslateModel();
         else if (m_currTransformType == TransformType.Rotate) RotateModel();
         else if (m_currTransformType == TransformType.Scale) ScaleModel();
+    }
+
+    public void SetModel(GameObject prefab)
+    {
+        Helper.DestroyChildren(gameObject);
+        Helper.SpawnPrefab(prefab, gameObject);
+        m_activeModel = prefab;
+        SetMaterial(m_activeMaterial);
+    }
+
+    public void SetMaterial(Material newMaterial)
+    {
+        m_activeMaterial = newMaterial;
+        if (newMaterial == null) newMaterial = GetOriginalModelMat(m_activeModel);
+
+        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer renderer in renderers)
+        {
+            if (renderer) renderer.material = newMaterial;
+        }
+    }
+
+    public Material GetOriginalModelMat(GameObject model)
+    {
+        return model.GetComponentInChildren<MeshRenderer>(true).sharedMaterial;
     }
 
     // Update is called once per frame

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StringLightsController : MonoBehaviour
@@ -9,14 +7,8 @@ public class StringLightsController : MonoBehaviour
     private Material lightbulbMaterial;
     private GameObject[] lightbulbLights;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (lightbulb == null) GameObject.FindWithTag("StringLightsBulb");
-        lightbulbMaterial = lightbulb.GetComponent<Renderer>().sharedMaterial;
-        lightbulbLights = GameObject.FindGameObjectsWithTag("StringLightsLight");
-    }
+    private bool m_stringLightsActive;
+    public bool isOn { get { return m_stringLightsActive; } }
 
     public void ToggleLights(bool isOn) {
         if (isOn) lightbulbMaterial.EnableKeyword("_EMISSION");
@@ -24,5 +16,15 @@ public class StringLightsController : MonoBehaviour
         foreach (GameObject light in lightbulbLights) {
             light.SetActive(isOn);
         }
+
+        m_stringLightsActive = isOn;
+    }
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        if (lightbulb == null) GameObject.FindWithTag("StringLightsBulb");
+        lightbulbMaterial = lightbulb.GetComponent<Renderer>().sharedMaterial;
+        lightbulbLights = GameObject.FindGameObjectsWithTag("StringLightsLight");
     }
 }
