@@ -8,8 +8,7 @@ public static class Helper
     // Instantiate a prefab and set its parent, local scale, and local rotation
     public static GameObject SpawnPrefab(GameObject prefab, GameObject parent)
     {
-        GameObject newObject = GameObject.Instantiate(prefab);
-        newObject.transform.SetParent(parent.transform);
+        GameObject newObject = GameObject.Instantiate(prefab, parent.transform);
         newObject.transform.localScale = Vector3.one;
         newObject.transform.localRotation = Quaternion.identity;
         return newObject;

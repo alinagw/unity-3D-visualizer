@@ -132,14 +132,6 @@ public class OptionsManager : MonoBehaviour
         }
     }
 
-    // Set the initial states of each option type
-    void InitializeState() {
-        modelController.SetModel(Models[0].Item);
-        environmentController.SetTimeOfDay(TimesOfDay[0]);
-        stringLightsController.ToggleLights(false);
-        firefliesController.ToggleFireflies(false);  
-    }
-
     void Awake()
     {
         // Load all the resources
@@ -149,6 +141,8 @@ public class OptionsManager : MonoBehaviour
         m_tabIcons = LoadTabIcons(Helper.GetEnumValues<OptionType>());
         m_transformTabIcons = LoadTabIcons(Helper.GetEnumValues<ModelController.TransformType>());
 
-        InitializeState();
+        // Set the initial states of the lights
+        stringLightsController.ToggleLights(false);
+        firefliesController.ToggleFireflies(false);  
     }
 }

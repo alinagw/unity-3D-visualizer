@@ -95,8 +95,9 @@ public class ModelController : MonoBehaviour
     public void SetModel(GameObject prefab)
     {
         // Destroy current active model and spawn new model prefab
-        Helper.DestroyChildren(gameObject);
-        Helper.SpawnPrefab(prefab, gameObject);
+        Helper.DestroyChildren(this.gameObject);
+        Helper.SpawnPrefab(prefab, this.gameObject);
+
         m_activeModel = prefab;
         // Set the material of the new model to the currently active material
         SetMaterial(m_activeMaterial);

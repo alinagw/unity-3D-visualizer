@@ -138,6 +138,11 @@ public class MenuManager : MonoBehaviour
                     optionsManager.SetOption(type, option, toggleComponent.isOn);
                 });
         }
+        // Set the first toggle active for each option type except lights
+        if (type != OptionsManager.OptionType.Lights)
+            {
+                toggleList.transform.GetChild(0).GetComponent<Toggle>().isOn = true;
+            }
     }
 
     void Start()
