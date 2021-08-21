@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Stores the necessary resources for each time of day option
+// Time of day will update the skybox, active directional light, active global volume, and the environment lighting gradient colors
 public class TimeOfDay
 {
     private string m_name;
@@ -27,9 +29,11 @@ public class TimeOfDay
     {
         string path = "TimesOfDay/" + name + "/" + name + " ";
         m_name = name;
+        // Load the resources from the "Resources/TimesOfDay" folder
         m_skybox = Resources.Load<Material>(path + "Skybox");
         m_light = Resources.Load<GameObject>(path + "Light");
         m_globalVolume = Resources.Load<GameObject>(path + "Global Volume");
+        // Set the gradient colors
         m_skyColor = skyColor;
         m_equatorColor = equatorColor;
         m_groundColor = groundColor;

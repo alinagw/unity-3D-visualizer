@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Stores an option's name and item of specified type
+// Used for models and materials
 public class Option<T> where T : Object
 {
     private string m_name;
