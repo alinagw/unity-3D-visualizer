@@ -140,9 +140,5 @@ public class OptionsManager : MonoBehaviour
         LoadTimesOfDay();
         m_tabIcons = LoadTabIcons(Helper.GetEnumValues<OptionType>());
         m_transformTabIcons = LoadTabIcons(Helper.GetEnumValues<ModelController.TransformType>());
-
-        // Set the initial states of the lights
-        stringLightsController.ToggleLights(false);
-        firefliesController.ToggleFireflies(false);  
     }
 }

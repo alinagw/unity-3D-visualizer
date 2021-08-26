@@ -22,5 +22,6 @@ public class FirefliesController : MonoBehaviour
     void Awake()
     {
         particles = GetComponent<ParticleSystem>();
+        ToggleFireflies(false);
     }
 }

@@ -31,5 +31,7 @@ public class StringLightsController : MonoBehaviour
         if (lightbulb == null) GameObject.FindWithTag("StringLightsBulb");
         lightbulbMaterial = lightbulb.GetComponent<Renderer>().sharedMaterial;
         lightbulbLights = GameObject.FindGameObjectsWithTag("StringLightsLight");
+
+        ToggleLights(false);
     }
 }

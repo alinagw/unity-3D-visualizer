@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 70615318598430937}
   - component: {fileID: 3612985294994640413}
   m_Layer: 0
-  m_Name: LionCrushingASerpant
+  m_Name: LionCrushingSerpent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
