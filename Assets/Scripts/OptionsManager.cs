@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -43,12 +44,12 @@ public class OptionsManager : MonoBehaviour
     public static TimeOfDay[] TimesOfDay { get { return m_timesOfDay; } }
 
     // Array of ToggleIconSets of menu tab icons
-    private ToggleIconSet[] m_tabIcons;
-    public ToggleIconSet[] TabIcons { get { return m_tabIcons; } }
+    private static ToggleIconSet[] m_tabIcons;
+    public static ToggleIconSet[] TabIcons { get { return m_tabIcons; } }
 
     // Array of ToggleIconSets of transform toggle icons
-        private ToggleIconSet[] m_transformTabIcons;
-    public ToggleIconSet[] TransformTabIcons { get { return m_transformTabIcons; } }
+    private static ToggleIconSet[] m_transformTabIcons;
+    public static ToggleIconSet[] TransformTabIcons { get { return m_transformTabIcons; } }
 
     // Load the prefabs for each model from the Resources/Models folder
     void LoadModels()
@@ -81,28 +82,30 @@ public class OptionsManager : MonoBehaviour
     }
 
     // Load all the toggle icons from the "Resources/TabIcons" folder
-    ToggleIconSet[] LoadTabIcons(dynamic types)
+    ToggleIconSet[] LoadTabIcons<T>() where T : System.Enum
     {
+        int[] types = (int[])System.Enum.GetValues(typeof(T));
         ToggleIconSet[] icons = new ToggleIconSet[types.Length];
-        foreach (var type in types)
+        
+        foreach (int type in types)
         {
-            icons[(int)type] = new ToggleIconSet("TabIcons/" + (type).ToString());
+            icons[type] = new ToggleIconSet("TabIcons/" + (System.Enum.GetName(typeof(T), type)).ToString());
         }
         return icons;
     }
 
     // Return the appropriate array of options for the given option type
-    public dynamic GetOptionsOfType(OptionType type)
+    public object[] GetOptionsOfType(OptionType type)
     {
         if (type == OptionType.Models) return Models;
         else if (type == OptionType.Materials) return Materials;
         else if (type == OptionType.TimesOfDay) return TimesOfDay;
-        if (type == OptionType.Lights) return Helper.GetEnumValues<LightEffect>();
+        else if (type == OptionType.Lights) return Helper.GetEnumValues<LightEffect>().Select(effect => Enum.ToObject(effect.GetType(), (int)effect)).ToArray();
         else return null;
     }
 
     // Return the correct name for the option for the given option type
-    public string GetOptionName(OptionType type, dynamic option)
+    public string GetOptionName(OptionType type, object option)
     {
         string name;
         if (type == OptionType.Models) name = ((Option<GameObject>)option).Name;
@@ -115,13 +118,12 @@ public class OptionsManager : MonoBehaviour
     }
 
     // Trigger appropriate controller function to update its state for the given option type
-    public void SetOption(OptionType type, dynamic option, bool isOn)
+    public void SetOption(OptionType type, object option, bool isOn)
     {
         // Light effects are not in a toggle group and can individually be toggled on/off
         if (type == OptionType.Lights) {
-            option = (LightEffect)option;
-            if (option == LightEffect.StringLights) stringLightsController.ToggleLights(isOn);
-            else if (option == LightEffect.Fireflies) firefliesController.ToggleFireflies(isOn);
+            if ((LightEffect)option == LightEffect.StringLights) stringLightsController.ToggleLights(isOn);
+            else if ((LightEffect)option == LightEffect.Fireflies) firefliesController.ToggleFireflies(isOn);
         } 
         // Models, materials, and time of day are in their own toggle groups so we update the state only when toggled on
         else if (isOn)
@@ -138,7 +140,7 @@ public class OptionsManager : MonoBehaviour
         LoadModels();
         LoadMaterials();
         LoadTimesOfDay();
-        m_tabIcons = LoadTabIcons(Helper.GetEnumValues<OptionType>());
-        m_transformTabIcons = LoadTabIcons(Helper.GetEnumValues<ModelController.TransformType>());
+        m_tabIcons = LoadTabIcons<OptionType>();
+        m_transformTabIcons = LoadTabIcons<ModelController.TransformType>();
     }
 }

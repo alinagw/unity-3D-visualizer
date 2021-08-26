@@ -42,10 +42,12 @@ public class MenuManager : MonoBehaviour
         // Set the tab toggle group to the tab list toggle group (only one tab can be active at a time)
         tabToggle.group = tabList;
         // Set the active/inactive sprites for the toggle button
-        SetTabImages(optionsManager.TabIcons[(int)type], tabToggle);
+        SetTabImages(OptionsManager.TabIcons[(int)type], tabToggle);
 
         // Spawn a corresponding tab content pane for this tab button
         GameObject tabPane = Helper.SpawnPrefab(tabPanePrefab, tabContentArea);
+        // Toggle the tab pane off by default
+        tabPane.SetActive(false);
 
         // Add a listener for when the toggle's value changes to switch tabs
         tabToggle.onValueChanged.AddListener(delegate
@@ -55,7 +57,7 @@ public class MenuManager : MonoBehaviour
             // Open the menu if a tab is toggled on for the first time
             if (tabToggle.isOn && !m_menuIsOpen) ToggleMenu(true);
             // Update the title text for the tab to match the option type name
-            if (tabToggle.isOn) tabTitle.GetComponent<Text>().text = type.ToString();
+            if (tabToggle.isOn) tabTitle.GetComponent<Text>().text = Helper.AddSpacesToString(type.ToString());
             // Set the corresponding tab pane GameObject to the toggle's state
             tabPane.SetActive(tabToggle.isOn);
         });
@@ -71,7 +73,7 @@ public class MenuManager : MonoBehaviour
         GameObject tab = Helper.SpawnPrefab(tabButtonPrefab, transformTabList.gameObject);
         Toggle tabToggle = tab.GetComponent<Toggle>();
         // Set the active/inactive sprites for the toggle button
-        SetTabImages(optionsManager.TransformTabIcons[(int)type], tabToggle);
+        SetTabImages(OptionsManager.TransformTabIcons[(int)type], tabToggle);
 
         // The reset transform button doesn't behave like a tab
         if (type == ModelController.TransformType.Reset)
@@ -163,5 +165,7 @@ public class MenuManager : MonoBehaviour
 
         // Toggle all the menu toggles off so the menu starts closed
         tabList.SetAllTogglesOff();
+        // Toggle the first transform tab (translate) on
+        transformTabList.transform.GetChild(0).GetComponent<Toggle>().isOn = true;
     }
 }

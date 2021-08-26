@@ -2,7 +2,6 @@
 
 Visualize and interact with different 3D statues in a garden environment. Choose from multiple different statue models, transform them in the space, and customize the materials and environment. Built in Unity using the Universal Render Pipeline.
 
----
 ## About
 
 ### Statue Garden
@@ -21,16 +20,25 @@ Given that the models are rendered in a simulated real-world space, the model tr
 
 I hope you enjoy!
 
----
 ## Instructions
 
 ### How to Play
 
 1. Open project in Unity Editor
 2. Ensure that the `3DVisualizer` scene is open
-3. In the `Game` tab in the Unity editor, open the aspect dropdown (probably starts off with "Free Aspect" selected) and uncheck "Low Resolution Aspect Ratios" if it is checked (so the graphcis look better!). This is only necessary if playing the app in the Unity editor.
-4. Click the play button in the Unity editor
+3. In the `Game` tab in the Unity editor, open the aspect dropdown (probably starts off with "Free Aspect" selected) and uncheck "Low Resolution Aspect Ratios" if it is checked (so the graphics look better!). This is only necessary if playing the app in the Unity editor.
+4. Click the play button in the Unity editor OR build and run the app
 
+### Building App
+
+I've successfully built and tested the app on the following platforms:
+
+* Mac OS (MacBook Pro)
+* iOS 14 (iPhone 12 Pro)
+  * *Note: plays in landscape mode only* 
+  * *Another note: there's a small UI quirk due to adjusting the UI to the iPhone safe area. I want to fix this in the future.*
+
+I haven't built/tested on Windows, Android, iPad OS, or WebGL.
 ### App Interface
 
 #### Joystick
@@ -95,7 +103,6 @@ On click, these will *not* affect the open/closed state of the menu. They do not
 * `ToggleIconSet.cs`: stores the active and inactive sprite set for a tab button
 * `Helper.cs`: utility functions
 
----
 
 ## Challenges
 
@@ -127,9 +134,11 @@ Along the same lines of updating the lighting on time of day change, I noticed t
 
 #### Scripting
 
-As I mentioned earlier, Javascript is not a typed language. I have used Typescript in the past, but I use JS at my job. It's been some time since I've coded in a typed language, so I definitely ran into trouble with figuring out what types to use in C#. I learned about generic typing using `T`, but there were cases where that didn't work for me (e.g. accessing a property that `T` doesn't have even though the type I'm using does, casting `T`, etc.). I tried to use generic typing wherever  could, but in some places I used the all-inclusive `dynamic` and `var` types. I would want to avoid these and learn better C# typing practices in the future.
+As I mentioned earlier, Javascript is not a typed language. I have used Typescript in the past, but I use JS at my job. It's been some time since I've coded in a typed language, so I definitely ran into trouble with figuring out what types to use in C#. I learned about generic typing using `T`, but there were cases where that didn't work for me (e.g. accessing a property that `T` doesn't have even though the type I'm using does, casting `T`, etc.). I want to learn better C# typing practices in the future.
 
----
+#### Platforms
+
+Building for iOS proved way more difficult than expected. I thought it would be an easy port over to iOS, but I ended up with several Null Exception errors that I couldn't figure out initially. I built the app again as a development build to get more detailed error messages. After some Google searching, I discovered that building for iOS doesn't support use of the `dynamic` type. I had used the all-inclusive `dynamic` type in a few places where I had some trouble with typing, but I was forced to fix it since it wasn't compatible with iOS. I dove deeper into typing again and managed to make use of generics more!
 
 ## Future Considerations
 
@@ -137,7 +146,7 @@ Since this project was quite a relearning experience for me, I definitely took n
 
 * I wanted to add additional cameras and implement a camera controller. It would have been fun to change the camera view and get to "travel" around the garden. Or maybe even implement a first-person controller to walk around your garden. I have done these things in the past, but I didn't get the chance to focus on it in this project.
 * Performance! This is definitely the area with the biggest room for improvement. I did a lot of reading on optimizing performance, so I know there are things that can be better.
-  * The models I'm using have pretty complex meshes with many polygons. It may be faster to instantiate all of the models as children of the `Model Controller` from the start and enable/disable the GameObjects rather than instaniating/destroying one at a time (my current implementation).
+  * The models I'm using have pretty complex meshes with many polygons. It may be faster to instantiate all of the models as children of the `Model Controller` from the start and enable/disable the GameObjects rather than instantiating/destroying one at a time (my current implementation).
   * I'm using a lot of point lights for the string lights. Before I was actually using *way* more, but I learned point lights are super not great for performance since they have 6 shadow maps. And they are especially performance heavy when their shadows overlap. I ended up lowering the resolution of the point light shadows and removing many of the point lights, but there is still much room for improvement.
   * I would want to strike a better balance between baked and real-time lighting if possible. Since I'm updating the time of day in real-time, I ended up having most of my lighting update in real-time rather than baked. I would want to learn more about what lighting could be baked and how to save on performance.
 * I thought a lot about the UI for transforming the model. I liked the idea of a joystick, since it reminds me of games like Animal Crossing where you use a physical D-pad or joystick to move furniture around. However, I would like to play around with different UI/UX options for the model transformations. 
@@ -145,12 +154,11 @@ Since this project was quite a relearning experience for me, I definitely took n
   * Have a UI that supports translating, rotating, and scaling all in one that doesn't require the user to toggle between the modes
   * Currently the transform mode toggles are on the left while the joystick is on the right. For a mobile view in landscape mode, this makes sense so your left thumb can reach the toggles while the right thumb stays fixed on the joystick. Relocating the toggles so the UI is more universal would be something to consider. I thought about having the joystick handle be the toggle through double clicks, but that came with its own challenges. There are many different designs to explore!
   * I would want to make the menu less intrusive so it doesn't cover the model when the customization menu is open. Reducing the opacity is one solution.
-
---- 
+ 
 
 ## Conclusions
 
-I hope you enjoyed bulding your statue garden! While I know this assignment is not technically flawless, I do hope it provides a good picture of my storytelling and design skills as well as the creative fun I love to have with code. Most importantly, I hope it conveys my ability to learn (re-learn) quickly on the job. My Unity and C# skills were extremely rusty, but I'm pretty proud of what I was able to re-teach myself and accomplish for this project. I've acknowledged a lot of room for improvement, but I am definitely confident that I could continue to sharpen my technical skills and improve my work. 
+I hope you enjoyed building your statue garden! While I know this assignment is not technically flawless, I do hope it provides a good picture of my storytelling and design skills as well as the creative fun I love to have with code. Most importantly, I hope it conveys my ability to learn (re-learn) quickly on the job. My Unity and C# skills were extremely rusty, but I'm pretty proud of what I was able to re-teach myself and accomplish for this project. I've acknowledged a lot of room for improvement, but I am definitely confident that I could continue to sharpen my technical skills and improve my work. 
 
 I definitely want to thank you for giving me the opportunity to jump back into Unity again after so long! I realized just how much I missed it, and I'm excited to use it for some new personal projects.
 
