@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-// Handles loading all of the resources used as customization options, initializing the current options, and setting new options
+// Handles loading all of the resources used as customization options and setting new options
 public class OptionsManager : MonoBehaviour
 {
     // List of the different types of customization options
